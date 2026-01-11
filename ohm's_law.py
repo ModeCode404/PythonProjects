@@ -1,33 +1,69 @@
-#Simple Ohm's law calculator script, made in python to help you understand Ohm's law better
-#This calculator have 4 functions and works in terminal
-#Made by ModeCode404 for the community 
-print("What do you want to calculate?")
-option=input("Vatts(V),Amps(A),Resistance(R) or Watts(W): ")
-if option=="V" or option=="v": #Checking if input is "V/v" to calculate volts using Ohm's law
-    a=float(input("Input the apmerage: "))
-    r=float(input("Input the resistance: "))
-    v=a*r
-    w=v*a #Printing the watts for you so you dont lose time running the code again
-    print(f"The voltage is {v} V")
-    print(f"Which gives us {w} W")
-elif option=="A" or option=="a": #Same for the Amps
-    v=float(input("Input the voltage: "))
-    r=float(input("Input the resistence: "))
-    a=v/r
-    w=v*a #Here also
-    print(f"The amperage is {a} A")
-    print(f"Which gives us {w} W")    
-elif option=="R" or option=="r": #Here also for the resistance
-    v=float(input("Input the voltage: "))
-    a=float(input("Input the amperage: ")) 
-    r=v/a
-    print(f"The resistance is {r} ohm")
-elif option=="W" or option=="w": #And here i added the Watts so you don't have to do it manually
-    v=float(input("Input the voltage: "))
-    a=float(input("Input the amperage: "))
-    w=v*a #And ofc here
-    print(f"The power is {w} W")    
-else: #And here for the wrong inputs, for the ones who didn't read it propperly
-    print("Invalid input!, input these 4 only.")   
-#And thats it for this file 
-#Working on updating and making new versions so stay tuned :) 
+"""
+Ohm's Law Calculator
+Purpose: Calculates Voltage, Amperage, Resistance, or Wattage based on user input.
+Features: Input cleaning, error handling, and a persistent loop.
+"""
+
+def calculate_ohms_law():
+    print("\n--- Advanced Ohm's Law Calculator ---")
+    print("Select the value you want to find:")
+    print("V) Volts  A) Amps  R) Resistance  W) Watts  Q) Quit")
+    
+    # .strip() removes accidental spaces; .upper() handles lowercase inputs
+    choice = input("Option: ").strip().upper()
+
+    try:
+        # Exit the function if the user wants to quit
+        if choice == 'Q':
+            return False
+
+        if choice == 'V':
+            # Formula: V = I * R
+            a = float(input("Input Amperage (A): "))
+            r = float(input("Input Resistance (Ω): "))
+            v = a * r
+            w = v * a  # Also calculating Power (P = V * I)
+            print(f"Result: {v:.2f} V | {w:.2f} W")
+
+        elif choice == 'A':
+            # Formula: I = V / R
+            v = float(input("Input Voltage (V): "))
+            r = float(input("Input Resistance (Ω): "))
+            a = v / r
+            w = v * a
+            print(f"Result: {a:.3f} A | {w:.2f} W")
+
+        elif choice == 'R':
+            # Formula: R = V / I
+            v = float(input("Input Voltage (V): "))
+            a = float(input("Input Amperage (A): "))
+            r = v / a
+            print(f"Result: {r:.2f} Ω")
+
+        elif choice == 'W':
+            # Formula: P = V * I
+            v = float(input("Input Voltage (V): "))
+            a = float(input("Input Amperage (A): "))
+            w = v * a
+            print(f"Result: {w:.2f} W")
+
+        else:
+            print("Invalid selection. Please choose V, A, R, or W.")
+
+    # Catches cases where user enters text instead of a number
+    except ValueError:
+        print("Error: Please enter numbers only (e.g., 12.5).")
+    # Catches division by zero (e.g., if Amperage is 0 in Resistance calc)
+    except ZeroDivisionError:
+        print("Error: Calculation would involve division by zero.")
+    
+    # Return True to keep the 'while' loop running
+    return True
+
+# This block ensures the script only runs if executed directly (not imported)
+if __name__ == "__main__":
+    running = True
+    while running:
+        # Update 'running' based on whether the user chose to 'Q'uit
+        running = calculate_ohms_law()
+#Stay tuned for more...
