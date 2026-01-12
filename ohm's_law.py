@@ -1,6 +1,6 @@
 #Simple Ohm's law calculator script, made in python to help you understand Ohm's law better
 #This calculator have 4 functions and works in terminal
-#Made by ModeCode404 for the community 
+#Made by ModeCode404 for the community!
 print("What do you want to calculate?")
 option=input("Vatts(V),Amps(A),Resistance(R) or Watts(W): ")
 if option=="V" or option=="v": #Checking if input is "V/v" to calculate volts using Ohm's law
